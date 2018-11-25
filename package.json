@@ -1,0 +1,10 @@
+{
+  "name": "sass-gen",
+  "version": "1.0.0",
+  "description": "Generate sass extension classes from sets of colors and measurements",
+  "main": "index.js",
+  "author": "Owen Shepherd",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {}
+}

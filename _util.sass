@@ -1,0 +1,74 @@
+@import variables
+
+/*
+ * generate a bunch of sizing extensions
+ *
+ * example usage:
+ *
+ * +spaced(margin, '', m, 10px, 5, (left: l, right: r, top: t, bottom: b))
+ *
+ * expands to:
+ *
+ * %m-0
+ *   margin: 0
+ * %m-l-0
+ *   margin-left: 0
+ * %m-t-0
+ *   margin-top: 0
+ * ...
+ * 
+ * %m-r-2
+ *   margin-right: 20px
+ * %m-x-2
+ *   @extend %m-l-2
+ *   @extend %m-r-2
+ * ...
+ * %m-l-5
+ *   margin-left: 50px
+ * %m-y-5
+ *   @extend %m-t-5
+ *   @extend %m-b-5
+ * ...
+ *
+ * etc.
+ *
+ */
+
+@mixin spaced($property, $shorthand, $increment, $max-increments, $dir-shorthands: $default-dir-shorthands, $suffix: '')
+  @for $i from 0 through $max-increments
+    $amount: $i * $increment
+    %#{$shorthand}-#{$i}
+      #{$property}#{$suffix}: #{$amount}
+
+    @each $dir in $directions
+      $dir-short: map-get($dir-shorthands, $dir)
+      %#{$shorthand}-#{$dir-short}-#{$i}
+        #{$property}-#{$dir}#{$suffix}: #{$amount}
+
+    %#{$shorthand}-x-#{$i}
+      @extend %#{$shorthand}-#{map-get($dir-shorthands, left)}-#{$i}
+      @extend %#{$shorthand}-#{map-get($dir-shorthands, right)}-#{$i}
+
+    %#{$shorthand}-y-#{$i}
+      @extend %#{$shorthand}-#{map-get($dir-shorthands, top)}-#{$i}
+      @extend %#{$shorthand}-#{map-get($dir-shorthands, bottom)}-#{$i}
+
+/*
+ * create a utility class
+ *
+ * exmaple usage:
+ *
+ * +util(m-1)
+ *
+ * expands to:
+ *
+ * .m-1
+ *   @extend %m-1
+ *
+ * which is dependent on you having a %m-1 extension in scope
+ *
+ */
+
+@mixin util($name)
+  .#{$name}
+    @extend %#{$name}

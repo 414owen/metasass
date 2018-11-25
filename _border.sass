@@ -1,0 +1,5 @@
+@import defaults
+@import util
+
+@mixin border($increment, $max-increments, $shorthand: b, $dir-shorthands: $default-dir-shorthands)
+  +spaced(border, $shorthand, $increment, $max-increments, $dir-shorthands, '-width')
