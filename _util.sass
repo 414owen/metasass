@@ -1,4 +1,4 @@
-@import variables
+@import constants
 
 /*
  * generate a bunch of sizing extensions
@@ -16,7 +16,7 @@
  * %m-t-0
  *   margin-top: 0
  * ...
- * 
+ *
  * %m-r-2
  *   margin-right: 20px
  * %m-x-2
@@ -54,7 +54,7 @@
       @extend %#{$shorthand}-#{map-get($dir-shorthands, bottom)}-#{$i}
 
 /*
- * create a utility class
+ * create a utility class from an extension
  *
  * exmaple usage:
  *

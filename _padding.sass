@@ -1,5 +1,57 @@
 @import defaults
 @import util
 
+/*
+ * generate a bunch of padding extensions
+ *
+ * example usage:
+ *
+ * +padding(10px, 5)
+ *
+ * expands to:
+ *
+ * %p-0
+ *   padding: 0
+ * %p-l-0
+ *   padding-left: 0
+ * %p-t-0
+ *   padding-top: 0
+ * ...
+ *
+ * %p-r-2
+ *   padding-right: 20px
+ * %p-x-2
+ *   @extend %p-l-2
+ *   @extend %p-r-2
+ * ...
+ * %p-l-5
+ *   padding-left: 50px
+ * %p-y-5
+ *   @extend %p-t-5
+ *   @extend %p-b-5
+ * ...
+ *
+ * etc.
+ *
+ * a more configures example
+ *
+ * +padding(10px, 5, pad, (left: lft, right: rght, top: tp, bottom: bttm))
+ *
+ * expands to:
+ *
+ * %pad-0
+ *   padding: 0
+ * %pad-lft-0
+ *   padding-left: 0
+ * ...
+ * %pad-tp-1
+ *   padding-top: 10px
+ * ...
+ * %pad-y-2
+ *   @extend %pad-tp-2
+ *   @extend %pad-bttm-2
+ * ...
+ */
+
 @mixin padding($increment, $max-increments, $shorthand: p, $dir-shorthands: $default-dir-shorthands)
   +spaced(padding, $shorthand, $increment, $max-increments, $dir-shorthands)

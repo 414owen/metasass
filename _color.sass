@@ -1,0 +1,29 @@
+@import defaults
+
+/*
+ * create a utility class from an extension
+ *
+ * exmaple usage:
+ *
+ * $props: (border-left-color: bl, color: fg, background-color: bg)
+ * $cols: (r: #d22, g: #2d2, b: 22b)
+ * +color($props, '-c-', $cols)
+ *
+ * expands to:
+ *
+ * %bl-c-r
+ *   border-left-color: #d22
+ * %bl-c-g
+ *   border-left-color: #2d2
+ * ...
+ * %fg-c-b
+ *   color: #22d
+ * ...
+ *
+ */
+
+@mixin color($properties: $default-color-properties, $join: '-c-', $colors)
+  @each $col-shorthand, $color in $colors
+    @each $property, $prop-shorthand in $properties
+      %#{$prop-shorthand}#{$join}#{$col-shorthand}
+        #{$property}: #{$color}

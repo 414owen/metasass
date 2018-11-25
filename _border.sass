@@ -1,5 +1,57 @@
 @import defaults
 @import util
 
+/*
+ * generate a bunch of border extensions
+ *
+ * example usage:
+ *
+ * +border(10px, 5)
+ *
+ * expands to:
+ *
+ * %b-0
+ *   border: 0
+ * %b-l-0
+ *   border-lef-widtht: 0
+ * %b-t-0
+ *   border-top-width: 0
+ * ...
+ *
+ * %b-r-2
+ *   border-right-width: 20px
+ * %b-x-2
+ *   @extend %b-l-2
+ *   @extend %b-r-2
+ * ...
+ * %b-l-5
+ *   border-left-width: 50px
+ * %b-y-5
+ *   @extend %b-t-5
+ *   @extend %b-b-5
+ * ...
+ *
+ * etc.
+ *
+ * a more configures example
+ *
+ * +border(10px, 5, bord, (left: lft, right: rght, top: tp, bottom: bttm))
+ *
+ * expands to:
+ *
+ * %bord-0
+ *   border-width: 0
+ * %bord-lft-0
+ *   border-left-width: 0
+ * ...
+ * %bord-tp-1
+ *   border-top-width: 10px
+ * ...
+ * %bord-y-2
+ *   @extend %bord-tp-2
+ *   @extend %bord-bttm-2
+ * ...
+ */
+
 @mixin border($increment, $max-increments, $shorthand: b, $dir-shorthands: $default-dir-shorthands)
   +spaced(border, $shorthand, $increment, $max-increments, $dir-shorthands, '-width')
