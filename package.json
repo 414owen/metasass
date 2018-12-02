@@ -1,5 +1,5 @@
 {
-  "name": "sass-gen",
+  "name": "metasass",
   "version": "1.0.0",
   "description": "Generate sass extension classes from sets of colors and measurements",
   "main": "index.js",
